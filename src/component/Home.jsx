@@ -1,17 +1,20 @@
 import React,{useState,useEffect,} from 'react';
 import axios from 'axios';
 import Invoice from '../component/Invoice';
+import Loading from './Loading';
 
 const BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 function Home(props){
         const [invoices,setInvoices] = useState([]);
+        const [loading,setLoading] = useState(true);
         const url = `${BASE_URL}/getAll`;
         
         useEffect(()=>{
                 axios.get(url)
                  .then((response)=>{
                         setInvoices(response?.data)
+                        setLoading(false);
                  })
                  .catch((error)=>{
                         console.log(error)
@@ -29,6 +32,7 @@ function Home(props){
                         const response = await axios.post(url,data);
                         if(response?.status===200){
                                 window.location.href = response.data;
+                                
                         }        
                         
                   } catch (error) {
@@ -39,6 +43,7 @@ function Home(props){
         return (
                 <>
                 <div style={{padding:"10%"}}>
+                  {loading&&<Loading />}
                   {invoices?.map((invoiceItem)=>
                       <>
                       <Invoice key={invoiceItem?.subtotal} props={invoiceItem} handleModal={handlePayment}/>

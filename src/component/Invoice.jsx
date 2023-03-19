@@ -59,8 +59,7 @@ export default function Invoice({props,handleModal}){
           </TableRow>
         ))}
   <TableRow>
-         <TableCell><strong>Subtotal</strong></TableCell>
-         <TableCell>{props?.subtotal}</TableCell>
+         <TableCell><strong>Subtotal :</strong>&nbsp;{props?.subtotal}</TableCell>
          <TableCell>Convenience Fee: {props?.convienance_fee}</TableCell>
          <TableCell align="right">
         <strong>Total Amount in INR</strong>
